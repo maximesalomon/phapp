@@ -22,18 +22,19 @@ function App() {
 
   return (
     <div className="container">
-      <h1 className="text-red-700">ProductHunt + Payfit</h1>
-      <div>
+      <h1 className="text-orange-600 mt-4 mb-4 px-4 text-3xl font-medium">ProductHunt + Payfit</h1>
         {
           posts.map((post, idx) => {
               return (
-              <div key={idx}>
-                <p>{post.votes_count} | {post.name} - {post.tagline}</p>
+              <div className="rounded py-4 mb-3 ml-4 flex border bg-white border-orange-600 " key={idx}>
+                <p className="text-orange-600 font-medium ml-4 w-8">{post.votes_count}</p>
+                <p className="ml-4 w-64 font-medium">{post.name}</p>
+                <p className="w-auto inline-block align-middle text-sm">{post.tagline}</p>
+                <p className="ml-4 text-orange-600 align-middle text-sm">Learn more</p>
               </div>
               )
           })
         }
-      </div>
     </div>
   );
 }
