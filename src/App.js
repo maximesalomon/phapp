@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 const PH_API = "https://api.producthunt.com/v1/"
+const PH_TOKEN =`${process.env.REACT_APP_PH_TOKEN}`
 
 class App extends Component {
   constructor(props) {
@@ -14,31 +15,29 @@ class App extends Component {
   componentDidMount() {
     let config = {
       headers: {
-        'Authorization': "Bearer 3236a3b5d8ea50aee668a7259ad65a9ab39128d2bf79b10704b828cb032618ed"
+        'Authorization': "Bearer " + PH_TOKEN
       }
     }
     axios
       .get(PH_API + "/posts", config)
       .then(res => {
-        console.log(res)
         this.setState({posts: res.data.posts})
-      })
-      .catch(err => {
-        console.log(err)
-        this.setState({error: err.message})
       })
   }
 
   render() {
+    console.log();
     return (
-      <div className="App">
-        <h1>ProductHunt + Payfit</h1>
+      <div className="container">
+        <h1 className="text-red-700">ProductHunt + Payfit</h1>
         <div>
-          <p>Hello</p>
           {
             this.state.posts.map((post, idx) => {
-              console.log(post.name)
-                return <p key={idx}>{post.name}</p>
+                return (
+                <div key={idx}>
+                  <p>{post.votes_count} | {post.name} - {post.tagline}</p>
+                </div>
+                )
             })
           }
         </div>
