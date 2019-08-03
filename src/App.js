@@ -1,24 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import PropTypes from "prop-types";
+import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
+import gql from "graphql-tag";
+import { setContext } from "apollo-link-context";
 
-const PH_API = "https://api.producthunt.com/v1/"
 const PH_TOKEN =`${process.env.REACT_APP_PH_TOKEN}`
+
+  const httpLink = new HttpLink({ uri: "https://api.producthunt.com/v2/api/graphql" });
+
+  const authLink = setContext((_, { headers }) => {
+    return {
+      headers: {
+        ...headers,
+        Authorization: `Bearer ${PH_TOKEN}`
+      }
+    }
+  });
+
+  const PH_API = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache()
+  });
 
 function App() {
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    let config = {
-      headers: {
-        'Authorization': "Bearer " + PH_TOKEN
+  let fetchedPosts = []
+
+  PH_API
+    .query({
+      query: gql`
+      {
+        posts(first: 10) {
+          edges {
+            node {
+              votesCount
+              name
+              tagline
+            }
+          }
+        }
       }
-    }
-    axios
-      .get(PH_API + "/posts", config)
-      .then(res => {
-        setPosts(res.data.posts)
-      })
-  }, [])
+      `
+    })
+    .then(res => fetchedPosts = res.data.posts.edges)
+    .then(useEffect(() => {
+      setPosts(fetchedPosts)
+    }, [fetchedPosts]))
 
   return (
     <div className="container">
@@ -27,9 +55,9 @@ function App() {
           posts.map((post, idx) => {
               return (
               <div className="rounded py-4 mb-3 ml-4 flex border bg-white border-orange-600 " key={idx}>
-                <p className="text-orange-600 font-medium ml-4 w-8">{post.votes_count}</p>
-                <p className="ml-4 w-64 font-medium">{post.name}</p>
-                <p className="w-auto inline-block align-middle text-sm">{post.tagline}</p>
+                <p className="text-orange-600 font-medium ml-4 w-8">{post.node.votesCount}</p>
+                <p className="ml-4 w-64 font-medium">{post.node.name}</p>
+                <p className="w-auto inline-block align-middle text-sm">{post.node.tagline}</p>
                 <p className="ml-4 text-orange-600 align-middle text-sm">Learn more</p>
               </div>
               )
