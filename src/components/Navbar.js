@@ -20,7 +20,7 @@ const Navbar = () => {
             href="https://twitter.com/maximesalomon"
             className="block mt-4 lg:inline-block lg:mt-0 text-white hover:font-medium mr-4"
           >
-            Build by maximesalomon
+            Built by maximesalomon
           </a>
         </div>
         <div>
