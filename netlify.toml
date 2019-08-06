@@ -1,6 +1,2 @@
-[build]
-  command = "yarn build"
-  publish = "build"
-
 [context.production.environment]
   REACT_APP_PH_TOKEN_ADMIN=17d5eb5d20729cc54c6749f1306263a915e9cc3038bed0f8d5ffe345ecf82b79
