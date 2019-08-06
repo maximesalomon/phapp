@@ -5,7 +5,7 @@ import { setContext } from "apollo-link-context";
 
 import Post from "./Post";
 
-const PH_TOKEN_ADMIN = `${REACT_APP_PH_TOKEN_ADMIN}`;
+const PH_TOKEN_ADMIN = `${process.env.REACT_APP_PH_TOKEN_ADMIN}`;
 
 const httpLink = new HttpLink({
   uri: "https://api.producthunt.com/v2/api/graphql"
