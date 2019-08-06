@@ -18,7 +18,7 @@ const App = () => {
       <Navbar loggedIn={loggedIn}/>
       <div className="flex">
         <PostList />
-        <Goals />
+        <Goals loggedIn={loggedIn}/>
       </div>
     </>
   );

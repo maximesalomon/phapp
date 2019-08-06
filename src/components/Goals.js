@@ -25,16 +25,18 @@ const PH_API_GOALS = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-const Goals = () => {
+const Goals = ({ loggedIn }) => {
     const [goals, setGoals] = useState([]);
 
     PH_API_GOALS.query({
         query: gql`
         {
-            goals(userId: 821, completed: false) {
+            goals(userId: 821) {
             edges {
                 node {
-                title
+                    createdAt
+                    title
+                    completedAt
                 }
             }
             }
@@ -43,29 +45,42 @@ const Goals = () => {
     }).then(res => setGoals(res.data.goals.edges));
 
   return (
-    <div className="mt-4 ml-8 font-bold text-2xl rounded border bg-white border-orange-600 w-1/4">
-      <h3 className="py-4 px-4">Maker Journal</h3>
-      <ul className="font-normal text-base px-4">
-        {goals.length === 0 ? (
-          <p>Loading...</p>
-        ) : (
-          goals.map((goal, idx) => {
-            const createdAt = goal.node.createdAt;
-            const title = goal.node.title;
-            const checked = goal.node.completedAt ? "checked" : null;
-            return (
-              <div className="pb-4">
-                <p className="font-bold">
-                  {moment(createdAt).format("dddd MMM Do YYYY")}
-                </p>
-                <li key={idx}>
-                  <input type="checkbox" checked={checked} /> {title} <input />
-                </li>
-              </div>
-            );
-          })
-        )}
-      </ul>
+    <div className="w-1/4">
+        <h3 className="py-4 px-4 ml-4 text-2xl font-bold">Maker Journal<span role="img" aria-label="ship"> ⛵️</span></h3>
+        <div className="ml-8 font-bold text-2xl rounded border bg-white border-orange-600">
+        <ul className="font-normal text-base px-4 mt-4 mb-4">
+            {
+                loggedIn === false
+                ?   <div>
+                        <p className="mb-4">You need to be logged in to view your Maker goals</p>
+                        <button
+                            className="text-sm px-8 py-3 leading-none border rounded text-orange-600 border-orange-600 hover:border-transparent hover:text-white hover:bg-orange-600 mt-4 lg:mt-0"
+                        >
+                            <a href="https://api.producthunt.com/v2/oauth/authorize?client_id=e14e77d9332895fbb8136b11380eb397f4d7275a39c5e7b3b9b06c2a11eedccc&redirect_uri=https://phpayfit.netlify.com&response_type=code&scope=public+private">Login</a>
+                        </button>
+                    </div>
+                : goals.length === 0
+                    ? <p>Loading...</p>
+                    : (
+                        goals.map((goal, idx) => {
+                            const createdAt = goal.node.createdAt;
+                            const title = goal.node.title;
+                            const checked = goal.node.completedAt ? "checked" : null;
+                            return (
+                            <div key={idx} className="pb-4">
+                                <p className="font-bold">
+                                {moment(createdAt).format("dddd MMM Do YYYY")}
+                                </p>
+                                <li key={idx}>
+                                <input type="checkbox" checked={checked} /> {title} <input />
+                                </li>
+                            </div>
+                            );
+                        })
+                    )
+            }
+        </ul>
+        </div>
     </div>
   );
 };
