@@ -28,21 +28,23 @@ const PH_API_GOALS = new ApolloClient({
 const Goals = ({ loggedIn }) => {
     const [goals, setGoals] = useState([]);
 
-    PH_API_GOALS.query({
-        query: gql`
-        {
-            goals(userId: 821) {
-            edges {
-                node {
-                    createdAt
-                    title
-                    completedAt
+    if(loggedIn === true) {
+        PH_API_GOALS.query({
+            query: gql`
+            {
+                goals(userId: 821) {
+                edges {
+                    node {
+                        createdAt
+                        title
+                        completedAt
+                    }
+                }
                 }
             }
-            }
-        }
-        `
-    }).then(res => setGoals(res.data.goals.edges));
+            `
+        }).then(res => setGoals(res.data.goals.edges))
+    }
 
   return (
     <div className="w-1/4">

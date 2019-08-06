@@ -8,9 +8,11 @@ const App = () => {
   const [loggedIn, setloggedIn] = useState(false);
 
   useEffect(() => {
-    if(localStorage.getItem('userPHToken') !== null) {
-      setloggedIn(true);
-    }
+    const queryString = window.location.search;
+    const userPHToken = queryString.slice(6)
+    localStorage.getItem('userPHToken') !== null 
+    ? setloggedIn(true)
+    : localStorage.setItem('userPHToken', userPHToken);
   }, [loggedIn])
 
   return (
