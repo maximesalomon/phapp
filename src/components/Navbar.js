@@ -1,8 +1,9 @@
 import React from "react";
 
-const Navbar = ({ loggedIn }) => {
+const Navbar = ({ loggedIn, setLoggedIn }) => {
   const loggingOut = () => {
-    localStorage.clear()
+    localStorage.removeItem('userPHToken');
+    setLoggedIn(false)
     window.location.href = "/";
   }
   return (
