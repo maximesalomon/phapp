@@ -1,6 +1,6 @@
 import React from "react";
 
-const Navbar = ({ loggedIn, setLoggedIn }) => {
+const Navbar = ({ loggedIn, setLoggedIn, name }) => {
 
   const loggingOut = () => {
     localStorage.removeItem('userPHToken');
@@ -39,7 +39,8 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
                 Login
               </a>
             </div>
-          : <div>
+          : <div className="flex">
+              <p className="text-white py-2 px-4">You are signed in as <span className="font-medium">{name}</span></p>
               <button
                 className="inline-block text-sm px-8 py-3 leading-none border rounded text-white border-white hover:border-transparent hover:text-orange-600 hover:bg-white mt-4 lg:mt-0"
                 onClick={() => loggingOut()}

@@ -24,11 +24,10 @@ const PH_API_GOALS = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-const Goals = ({ loggedIn }) => {
+const Goals = ({ loggedIn, id }) => {
   const [goals, setGoals] = useState([]);
   const [goalsFetched, setGoalsFetched] = useState(false);
   useEffect(() => {}, [goals, loggedIn]);
-
   if (loggedIn === true) {
     PH_API_GOALS.query({
       query: gql`
@@ -46,7 +45,7 @@ const Goals = ({ loggedIn }) => {
       `
     })
       .then(res => setGoals(res.data.goals.edges))
-      .then(res => setGoalsFetched(true));
+      .then(() => setGoalsFetched(true));
   }
 
   return (
