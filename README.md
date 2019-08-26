@@ -4,14 +4,14 @@ You can find this app here 👉 https://phpayfit.netlify.com
 
 If you want to run it on your machine 👇
 
-## Install this app locally
+## How to install this app locally?
 
 1 - npm install
 2 - Setup Env variables
 
 Create an .env file in the root directory
 
-Create 3 keys =
+You will then need to create 3 env variables =
 - REACT_APP_PH_TOKEN_ADMIN 👉 This is your admin token
 - REACT_APP_PH_API_KEY 👉 This is your PH API Key
 - REACT_APP_PH_API_SECRET 👉 This is your PH API Secret
