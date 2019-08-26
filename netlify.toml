@@ -3,6 +3,6 @@
   publish = "build"
 
 [context.production.environment]
-  REACT_APP_PH_TOKEN_ADMIN = process.env.REACT_APP_PH_TOKEN_ADMIN
+  REACT_APP_PH_TOKEN_ADMIN = context.production.environment.REACT_APP_PH_TOKEN_ADMIN
   REACT_APP_PH_API_KEY = "e14e77d9332895fbb8136b11380eb397f4d7275a39c5e7b3b9b06c2a11eedccc"
   REACT_APP_PH_API_SECRET = "ac62f6842a2d0ade30029cfe20d0837e882d5c2cacd2915e6936de58a4386b27"
