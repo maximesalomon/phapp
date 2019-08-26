@@ -73,7 +73,7 @@ const App = () => {
 
   useEffect(() => {
     localStorage.getItem("userPHToken") !== null
-      ? setLoggedIn(true)
+      ? fetchProfile()
       : getPHToken();
   }, [loggedIn]);
 
