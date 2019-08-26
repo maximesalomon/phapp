@@ -26,8 +26,8 @@ const PH_API_GOALS = new ApolloClient({
 
 const Goals = ({ loggedIn }) => {
   const [goals, setGoals] = useState([]);
-  useEffect(() => {
-  }, [goals, loggedIn])
+  const [goalsFetched, setGoalsFetched] = useState(false);
+  useEffect(() => {}, [goals, loggedIn]);
 
   if (loggedIn === true) {
     PH_API_GOALS.query({
@@ -44,7 +44,9 @@ const Goals = ({ loggedIn }) => {
           }
         }
       `
-    }).then(res => setGoals(res.data.goals.edges));
+    })
+      .then(res => setGoals(res.data.goals.edges))
+      .then(res => setGoalsFetched(true));
   }
 
   return (
@@ -58,8 +60,7 @@ const Goals = ({ loggedIn }) => {
       </h3>
       <div className="ml-8 font-bold text-2xl rounded border bg-white border-orange-600">
         <ul className="font-normal text-base px-4 mt-4 mb-4">
-          {loggedIn === false && goals.length === 0
-          ? (
+          {loggedIn === false ? (
             <div>
               <p className="mb-4">
                 You need to be logged in to view your Maker goals
@@ -70,10 +71,11 @@ const Goals = ({ loggedIn }) => {
                 </button>
               </a>
             </div>
-          ) : <p>Loading...</p>
-          }
-          {goals.length !== 0
-          ? (
+          ) : goalsFetched === false ? (
+            <p>Loading...</p>
+          ) : goals.length === 0 ? (
+            <p className="pb-4">You have no goals yet</p>
+          ) : (
             goals.map((goal, idx) => {
               const createdAt = goal.node.createdAt;
               const title = goal.node.title;
@@ -90,9 +92,7 @@ const Goals = ({ loggedIn }) => {
                 </div>
               );
             })
-          )
-          : <p className="pb-4"> You have no goals yet.</p>
-        }
+          )}
         </ul>
       </div>
     </div>
