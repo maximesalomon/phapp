@@ -58,7 +58,7 @@ const App = () => {
       // ADD BODY = https://api.producthunt.com/v2/docs/oauth_user_authentication/oauth_token_use_the_access_grant_code_you_received_through_the_redirect_to_request_an_access_token
       client_id: `${process.env.REACT_APP_PH_API_KEY}`,
       client_secret: `${process.env.REACT_APP_PH_API_SECRET}`,
-      redirect_uri: "https://phpayfit.netlify.com",
+      redirect_uri: "https://phapp.netlify.com",
       code: `${PHToken}`,
       grant_type: "authorization_code"
     };
