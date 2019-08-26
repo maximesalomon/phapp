@@ -58,7 +58,8 @@ const Goals = ({ loggedIn }) => {
       </h3>
       <div className="ml-8 font-bold text-2xl rounded border bg-white border-orange-600">
         <ul className="font-normal text-base px-4 mt-4 mb-4">
-          {loggedIn === false ? (
+          {loggedIn === false && goals.length === 0
+          ? (
             <div>
               <p className="mb-4">
                 You need to be logged in to view your Maker goals
@@ -69,9 +70,10 @@ const Goals = ({ loggedIn }) => {
                 </button>
               </a>
             </div>
-          ) : goals.length === 0 ? (
-            <p>Loading...</p>
-          ) : (
+          ) : <p>Loading...</p>
+          }
+          {goals.length !== 0
+          ? (
             goals.map((goal, idx) => {
               const createdAt = goal.node.createdAt;
               const title = goal.node.title;
@@ -88,7 +90,9 @@ const Goals = ({ loggedIn }) => {
                 </div>
               );
             })
-          )}
+          )
+          : <p className="pb-4"> You have no goals yet.</p>
+        }
         </ul>
       </div>
     </div>
