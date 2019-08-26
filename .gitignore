@@ -2,6 +2,7 @@
 
 # api keys
 .env
+netlify.toml
 
 # dependencies
 /node_modules
