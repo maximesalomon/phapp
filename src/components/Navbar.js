@@ -5,7 +5,6 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
   const loggingOut = () => {
     localStorage.removeItem('userPHToken');
     setLoggedIn(false)
-    window.location.href = "/";
   }
   
   return (

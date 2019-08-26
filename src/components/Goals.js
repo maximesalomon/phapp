@@ -28,8 +28,7 @@ const PH_API_GOALS = new ApolloClient({
 const Goals = ({ loggedIn }) => {
   const [goals, setGoals] = useState([]);
   useEffect(() => {
-
-  }, [goals])
+  }, [goals, loggedIn])
 
   if (loggedIn === true) {
     PH_API_GOALS.query({

@@ -28,7 +28,9 @@ const App = () => {
   }
 
   useEffect(() => {
-    getPHToken()
+    localStorage.getItem('userPHToken') !== null 
+    ? setLoggedIn(true)
+    : getPHToken()
   }, [loggedIn])
 
   return (
