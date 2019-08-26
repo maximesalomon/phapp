@@ -5,13 +5,12 @@ import { setContext } from "apollo-link-context";
 
 var moment = require("moment");
 
-const PH_TOKEN_USER = localStorage.getItem("userPHToken");
-
 const httpLink = new HttpLink({
   uri: "https://api.producthunt.com/v2/api/graphql"
 });
 
 const authLink = setContext((_, { headers }) => {
+  const PH_TOKEN_USER = localStorage.getItem("userPHToken");
   return {
     headers: {
       ...headers,
