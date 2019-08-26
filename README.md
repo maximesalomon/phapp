@@ -1,6 +1,6 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c1d99ab1-0a3f-46b4-9ff6-a191a9f4c605/deploy-status)](https://app.netlify.com/sites/phpayfit/deploys)
 
-You can find this app here 👉 https://phpayfit.netlify.com
+You can find this app here 👉 https://phapp.netlify.com
 
 If you want to run it on your machine 👇
 
