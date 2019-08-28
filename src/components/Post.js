@@ -11,7 +11,14 @@ const Post = ({ post }) => {
         {post.node.tagline}
       </p>
       <div className="absolute right-0 mr-8">
-        <a href={post.node.url} className="text-orange-600 align-middle text-sm" target="_blank" rel="noopener noreferrer">Learn more</a>
+        <a
+          href={post.node.url}
+          className="text-orange-600 align-middle text-sm"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn more
+        </a>
       </div>
     </div>
   );

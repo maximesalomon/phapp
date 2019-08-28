@@ -43,12 +43,16 @@ const PostList = () => {
         }
       }
     `
-  })
-  .then(res => setPosts(res.data.posts.edges))
+  }).then(res => setPosts(res.data.posts.edges));
 
   return (
     <div className="mt-4 ml-8 w-8/12">
-      <h1 className="ml-4 mb-4 text-2xl font-bold">Today's Products <span role="img" aria-label="cat">🐈</span></h1>
+      <h1 className="ml-4 mb-4 text-2xl font-bold">
+        Today's Products{" "}
+        <span role="img" aria-label="cat">
+          🐈
+        </span>
+      </h1>
       {posts.length === 0 ? (
         <p className="ml-4">Loading...</p>
       ) : (

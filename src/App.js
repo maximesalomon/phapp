@@ -32,8 +32,7 @@ const App = () => {
   const [user, setUser] = useState({});
 
   const fetchProfile = () => {
-    return (
-      PH_API_USER.query({
+    return PH_API_USER.query({
       query: gql`
         {
           viewer {
@@ -47,8 +46,7 @@ const App = () => {
       `
     })
       .then(res => setUser(res.data.viewer.user))
-      .then(() => setLoggedIn(true))
-    )
+      .then(() => setLoggedIn(true));
   };
 
   const getPHToken = () => {
@@ -67,7 +65,7 @@ const App = () => {
         const userPHToken = res.data.access_token;
         localStorage.setItem("userPHToken", userPHToken);
       })
-      .then(() => fetchProfile())
+      .then(() => fetchProfile());
   };
 
   useEffect(() => {
@@ -78,7 +76,11 @@ const App = () => {
 
   return (
     <>
-      <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} name={user.username} />
+      <Navbar
+        loggedIn={loggedIn}
+        setLoggedIn={setLoggedIn}
+        name={user.username}
+      />
       <div className="flex">
         <PostList />
         <Goals loggedIn={loggedIn} id={user.id} />
