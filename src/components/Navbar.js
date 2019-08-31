@@ -7,10 +7,10 @@ const Navbar = ({ loggedIn, setLoggedIn, name }) => {
   };
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-phorange p-6">
+    <nav className="flex items-center justify-between flex-wrap bg-phorange pl-6 pr-6 p-3">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
         <span className="font-semibold text-xl tracking-tight">
-          PHapp
+          PH MaxReader
         </span>
       </div>
       <div>
