@@ -13,6 +13,7 @@ const Navbar = ({ loggedIn, setLoggedIn, name }) => {
           PHapp
         </span>
       </div>
+      <div>
         {loggedIn === false ? (
           <div>
             <a
