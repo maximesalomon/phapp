@@ -2,7 +2,7 @@ import React from "react";
 
 const Post = ({ post }) => {
   return (
-    <div className="relative rounded py-4 mb-3 ml-4 flex border bg-white border-orange-600">
+    <div className="relative rounded py-6 mb-3 ml-4 flex border bg-white border-orange-600">
       <p className="text-orange-600 font-medium ml-4 w-8">
         {post.node.votesCount}
       </p>
